@@ -1,0 +1,40 @@
+/* 
+=================================================
+Imports
+================================================= 
+*/
+@use './functions' as f;
+@use './breakpoints';
+
+.grid {
+	display: grid;
+}
+
+$columns: 12;
+
+// Create a non-breakpoint grid column and col span
+@for $column from 1 through $columns {
+	.col-span-#{$column} {
+		grid-column: span #{$column};
+	}
+	.col-#{$column} {
+		grid-template-columns: repeat(#{$column}, minmax(0, 1fr));
+		width: 100%; // Check if this is needed
+	}
+}
+
+// Create Non-breakpoint Gap Spacing
+// @each $gap-name, $gap-val in v.$spacing {
+// 	.gap-y-#{$gap-name} {
+// 		row-gap: #{$gap-val}rem;
+// 	}
+// 	.gap-x-#{$gap-name} {
+// 		column-gap: #{$gap-val}rem;
+// 	}
+// 	.gap-#{$gap-name} {
+// 		gap: #{$gap-val}rem;
+// 	}
+// }
+[class^='col'] {
+	background: hsl(100, 50%, 50%);
+}

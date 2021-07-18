@@ -1,0 +1,32 @@
+/* Use the correct units
+Fonts
+	- rem
+	- set html element to 62.5% to set base font size to 10px
+	Example: 21px would be 2.1rem (2.1 x 10 = 21)
+
+Width
+	- %
+
+Padding/Margin
+	- em and rem
+
+Media Queries
+	- em
+
+Note : ch unit for paragraph widths
+*/
+
+/* Using CSS Custom Properties
+	- Apply design tokens 
+	- Global tokens are context-agnostic ( color, opacity, shadow, icons, font-size, -weight, -family, letter-spacing, line height, border, spacing, media-query breakpoints, transition, z-index)
+	- Alias tokens are for context-specific purpose ( button-primary, checkbox-active, radio-active )
+	- Don't apply the same token name to everything, separate concerns
+*/
+// :root {
+	// Global Tokens
+
+	// Alias Tokens
+
+	// Component Tokens
+// }
+

@@ -1,0 +1,67 @@
+/* 
+=================================================
+Imports
+================================================= 
+*/
+@use 'sass:map';
+@use './functions' as f;
+@use './breakpoints';
+
+// $min-widths: (
+// 	sm: f.prem(640),
+// 	md: f.prem(768),
+// 	lg: f.prem(1024),
+// 	xl: f.prem(1280),
+// 	xxl: f.prem(1536)
+// );
+// $max-widths: (
+// 	sm: f.prem(640),
+// 	md: f.prem(768),
+// 	lg: f.prem(1024),
+// 	xl: f.prem(1280),
+// 	xxl: f.prem(1536)
+// );
+
+/* 
+=================================================
+Create Breakpoints
+================================================= 
+*/
+//Apply sm, md, lg, xl, xxl to your @include. @content will be applied inside your mixin.
+//Example: 
+//@include breakpoints(sm) {
+//	max-width: 640px;
+//}
+
+@mixin breakpoints($map-key, $map-variable: breakpoints.$min-widths) {
+	@media screen and (min-width: map.get($map-variable, $map-key)) {
+		@content;
+	}
+}
+/* 
+=================================================
+Create Container Widths
+================================================= 
+*/
+// Loop through each max width and include a breakpoint for each
+@mixin container-widths($map-max-variable: breakpoints.$max-widths, $map-min-variable: breakpoints.$min-widths) {
+	@each $map-key, $map-value in $map-max-variable {
+		@include breakpoints($map-key, $map-min-variable) {
+			max-width: $map-value;
+		}
+	}
+}
+
+/* 
+=================================================
+Container
+================================================= 
+*/
+.container {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: f.prem(20);
+	padding-right: f.prem(20);
+	@include container-widths();
+}
