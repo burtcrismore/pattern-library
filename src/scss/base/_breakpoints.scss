@@ -7,9 +7,10 @@ Imports
 
 /* 
 =================================================
-Container Breakpoints
+Container Widths & Breakpoints
 ================================================= 
 */
+// Mobile First Breakpoints
 $min-widths: (
 	sm: f.prem(640),
 	md: f.prem(768),
@@ -17,6 +18,8 @@ $min-widths: (
 	xl: f.prem(1280),
 	xxl: f.prem(1536)
 );
+
+// Container Max Widths
 $max-widths: (
 	sm: f.prem(640),
 	md: f.prem(768),

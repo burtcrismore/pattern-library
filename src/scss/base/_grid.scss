@@ -3,13 +3,16 @@
 Imports
 ================================================= 
 */
-@use './functions' as f;
-@use './breakpoints';
+@use './variables' as v;
+@use './spacing' as s;
+@use './breakpoints' as b;
+@use './containers' as c;
 
 .grid {
 	display: grid;
 }
 
+// Column Count
 $columns: 12;
 
 // Create a non-breakpoint grid column and col span
@@ -24,17 +27,65 @@ $columns: 12;
 }
 
 // Create Non-breakpoint Gap Spacing
-// @each $gap-name, $gap-val in v.$spacing {
-// 	.gap-y-#{$gap-name} {
-// 		row-gap: #{$gap-val}rem;
-// 	}
-// 	.gap-x-#{$gap-name} {
-// 		column-gap: #{$gap-val}rem;
-// 	}
-// 	.gap-#{$gap-name} {
-// 		gap: #{$gap-val}rem;
+@each $map-key, $map-value in s.$spacing {
+	.gap-y-#{$map-key} {
+		row-gap: #{$map-value};
+	}
+	.gap-x-#{$map-key} {
+		column-gap: #{$map-value};
+	}
+	.gap-#{$map-key} {
+		gap: #{$map-value};
+	}
+}
+
+// Set grid-column to auto
+.col-span-auto {
+	grid-column: auto;
+}
+
+// Create grid column, col span, and gap spacing for each breakpoint
+@each $breakpoint-key, $breakpoint-value in b.$min-widths {
+	@include c.breakpoints($breakpoint-key) {
+		// Columns
+		@for $column from 1 through $columns {
+			.col-span-#{$column}-#{$breakpoint-key} {
+				grid-column: span #{$column};
+			}
+			.col-#{$column}-#{$breakpoint-key} {
+				grid-template-columns: repeat(#{$column}, minmax(0, 1fr));
+				width: 100%; // Check if this is needed
+			}
+		}
+
+		// Spans
+		@each $map-key, $map-value in s.$spacing {
+			.gap-y-#{$map-key}-#{$breakpoint-key} {
+				row-gap: #{$map-value};
+			}
+			.gap-x-#{$map-key}-#{$breakpoint-key} {
+				column-gap: #{$map-value};
+			}
+			.gap-#{$map-key}-#{$breakpoint-key} {
+				gap: #{$map-value};
+			}
+		}
+
+		// Grid Column Auto
+		.col-span-auto-#{$breakpoint-key} {
+			grid-column: auto;
+		}
+	}
+}
+
+// @each $breakpoint-key, $breakpoint-value in b.$min-widths {
+// 	@include c.breakpoints($breakpoint-key) {
+// 		.col-span-auto-#{$breakpoint-key} {
+// 			grid-column: auto;
+// 		}
 // 	}
 // }
-[class^='col'] {
-	background: hsl(100, 50%, 50%);
+
+.col {
+	background: hsl(200, 50%, 60%);
 }

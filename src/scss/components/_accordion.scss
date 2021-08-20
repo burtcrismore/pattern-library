@@ -1,5 +1,68 @@
+/* 
+=================================================
+Imports
+================================================= 
+*/
+@use '../base/icons' as *;
+
 .accordion {
+	&__title {
+		margin: 0;
+		border-bottom: 1px solid hsla(0deg, 0%, 70%, 1);
+	}
+	&__button {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		text-align: left;
+		padding: 1rem 1.25rem;
+		border: none;
+		cursor: pointer;
+
+		&::after {
+			@include icons('Pro', 300, '\f078');
+		}
+		svg {
+			transition: transform 200ms ease-in-out;
+		}
+		&--expanded svg {
+			transform: rotate(-180deg);
+		}
+	}
+
 	&__body {
+		border-bottom: 1px solid hsla(0deg, 0%, 70%, 1);
+		// transition: height 200ms ease-in-out;
+		// height: 0;
+		// overflow: hidden;
+	}
+
+	&__content {
+		// display: none;
+		padding: 1rem 1.25rem;
+	}
+}
+:root {
+	--height: 0px;
+}
+.transition {
+	height: var(--height);
+	transition: height 200ms ease-in-out;
+	overflow: hidden;
+}
+
+// .expanding {
+// 	height: 0;
+// 	overflow: hidden;
+// 	transition: height 200ms ease-in-out;
+// }
+// .collapsing {
+// 	height: 0 !important;
+// 	overflow: hidden;
+// 	transition: height 200ms ease-in-out;
+// }
+.collapse {
+	&:not(.show) {
 		display: none;
 	}
 }

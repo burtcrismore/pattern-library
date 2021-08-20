@@ -29,6 +29,6 @@ p {
 	// font-size: f.prem(20);
 	// color: variables.$test;
 	@include c.breakpoints(md) {
-		color: red;
+		// color: red;
 	}
 }
